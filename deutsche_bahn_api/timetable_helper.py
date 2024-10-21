@@ -67,15 +67,23 @@ class TimetableHelper:
             train_object.stop_id = train.attrib["id"]
             train_object.train_type = trip_label_object["c"]
             train_object.train_number = trip_label_object["n"]
-            train_object.platform = departure_object['pp']
-            train_object.stations = departure_object['ppth']
-            train_object.departure = departure_object['pt']
+            if departure_object:
+                train_object.platform = departure_object['pp']
+                train_object.stations = departure_object['ppth']
+                train_object.departure = departure_object['pt']
+                if "l" in departure_object:
+                    train_object.train_line = departure_object['l']
+            else:
+                train_object.platform = arrival_object['pp']
+                train_object.stations = arrival_object['ppth']
+                train_object.departure = arrival_object['pt']
+                if "l" in arrival_object:
+                    train_object.train_line = arrival_object['l']                
 
             if "f" in trip_label_object:
                 train_object.trip_type = trip_label_object["f"]
 
-            if "l" in departure_object:
-                train_object.train_line = departure_object['l']
+
 
             if arrival_object:
                 train_object.passed_stations = arrival_object['ppth']
@@ -122,6 +130,8 @@ class TimetableHelper:
                         train_changes.arrival = changes.attrib["ct"]
                     if "cpth" in changes.attrib:
                         train_changes.passed_stations = changes.attrib["cpth"]
+                    if "cp" in changes.attrib:
+                        train_changes.platform = changes.attrib["cp"]
                     if "cs" in changes.attrib:
                         train_changes.arrival_cancelled = changes.attrib["cs"]
 
