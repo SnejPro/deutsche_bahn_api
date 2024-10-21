@@ -53,3 +53,8 @@ class StationHelper:
                 results.append(station)
 
         return results
+
+    def find_station_by_id(self, query: int) -> list[Station]:
+        for station in self.stations_list:
+            if query == station.EVA_NR:
+                return station
