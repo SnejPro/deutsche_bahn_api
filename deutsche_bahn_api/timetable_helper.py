@@ -59,9 +59,9 @@ class TimetableHelper:
                 if train_details.tag == "ar":
                     arrival_object = train_details.attrib
 
-            if not departure_object:
-                """ Arrival without department """
-                continue
+#            if not departure_object:
+#                """ Arrival without department """
+#                continue
 
             train_object: Train = Train()
             train_object.stop_id = train.attrib["id"]
