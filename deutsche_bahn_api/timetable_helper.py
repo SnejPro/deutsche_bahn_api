@@ -114,12 +114,16 @@ class TimetableHelper:
                         train_changes.stations = changes.attrib["cpth"]
                     if "cp" in changes.attrib:
                         train_changes.platform = changes.attrib["cp"]
+                    if "cs" in changes.attrib:
+                        train_changes.departure_cancelled = changes.attrib["cs"]
 
                 if changes.tag == "ar":
                     if "ct" in changes.attrib:
                         train_changes.arrival = changes.attrib["ct"]
                     if "cpth" in changes.attrib:
                         train_changes.passed_stations = changes.attrib["cpth"]
+                    if "cs" in changes.attrib:
+                        train_changes.arrival_cancelled = changes.attrib["cs"]
 
                 for message in changes:
                     new_message = Message()
