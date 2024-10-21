@@ -75,8 +75,6 @@ class TimetableHelper:
                     train_object.train_line = departure_object['l']
             else:
                 train_object.platform = arrival_object['pp']
-                train_object.stations = arrival_object['ppth']
-                train_object.departure = arrival_object['pt']
                 if "l" in arrival_object:
                     train_object.train_line = arrival_object['l']                
 
