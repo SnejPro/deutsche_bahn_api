@@ -29,12 +29,19 @@ class TimetableHelper:
         if date is not None:
             date_string = date.strftime("%y%m%d")
         hour: str = hour_date.strftime("%H")
-        response = requests.get(
-            f"https://apis.deutschebahn.com/db-api-marketplace/apis/timetables/v1"
-            f"/plan/{self.station.EVA_NR}/{date_string}/{hour}",
-            headers=self.api_authentication.get_headers(),
-            verify=False
-        )
+        try:
+            response = requests.get(
+                f"https://apis.deutschebahn.com/db-api-marketplace/apis/timetables/v1"
+                f"/plan/{self.station.EVA_NR}/{date_string}/{hour}",
+                headers=self.api_authentication.get_headers()
+            )
+        except SSLError:
+            response = requests.get(
+                f"https://apis.deutschebahn.com/db-api-marketplace/apis/timetables/v1"
+                f"/plan/{self.station.EVA_NR}/{date_string}/{hour}",
+                headers=self.api_authentication.get_headers(),
+                verify=False
+            )
         if response.status_code == 410:
             return self.get_timetable_xml(int(hour), datetime.now() + timedelta(days=1))
         elif response.status_code == 401:
