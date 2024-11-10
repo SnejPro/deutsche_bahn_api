@@ -153,7 +153,7 @@ class TimetableHelper:
                     try:
                         new_message.id = message.attrib["id"]
                     except Exception as err:
-                        print("Message ID - , err)
+                        print("Message ID - ", err)
                     try:
                         new_message.code = message.attrib["c"]
                     except Exception as err:
