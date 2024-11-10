@@ -32,7 +32,8 @@ class TimetableHelper:
         response = requests.get(
             f"https://apis.deutschebahn.com/db-api-marketplace/apis/timetables/v1"
             f"/plan/{self.station.EVA_NR}/{date_string}/{hour}",
-            headers=self.api_authentication.get_headers()
+            headers=self.api_authentication.get_headers(),
+            verify=False
         )
         if response.status_code == 410:
             return self.get_timetable_xml(int(hour), datetime.now() + timedelta(days=1))
