@@ -150,10 +150,22 @@ class TimetableHelper:
 
                 for message in changes:
                     new_message = Message()
-                    new_message.id = message.attrib["id"]
-                    new_message.code = message.attrib["c"]
-                    new_message.time = message.attrib["ts"]
-                    new_message.message = resolve_message_by_code(int(message.attrib["c"]))
+                    try:
+                        new_message.id = message.attrib["id"]
+                    except Exception as err:
+                        print("Message ID - "+err)
+                    try:
+                        new_message.code = message.attrib["c"]
+                    except Exception as err:
+                        print("Message code - "+err)
+                    try:
+                        new_message.time = message.attrib["ts"]
+                    except Exception as err:
+                        print("Message time - "+err)
+                    try:
+                        new_message.message = resolve_message_by_code(int(message.attrib["c"]))
+                    except Exception as err:
+                        print("Message message - "+err)
                     train_changes.messages.append(new_message)
 
             found_train.train_changes = train_changes
