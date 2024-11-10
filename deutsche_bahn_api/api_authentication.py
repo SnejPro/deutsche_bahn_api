@@ -13,7 +13,7 @@ class ApiAuthentication:
                 headers={
                     "DB-Api-Key": self.client_secret,
                     "DB-Client-Id": self.client_id,
-                )
+                }
             )
         except requests.exceptions.SSLError:
             response = requests.get(
