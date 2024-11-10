@@ -35,7 +35,7 @@ class TimetableHelper:
                 f"/plan/{self.station.EVA_NR}/{date_string}/{hour}",
                 headers=self.api_authentication.get_headers()
             )
-        except SSLError:
+        except requests.exceptions.SSLError:
             response = requests.get(
                 f"https://apis.deutschebahn.com/db-api-marketplace/apis/timetables/v1"
                 f"/plan/{self.station.EVA_NR}/{date_string}/{hour}",
