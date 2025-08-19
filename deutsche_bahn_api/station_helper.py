@@ -54,7 +54,22 @@ class StationHelper:
 
         return results
 
-    def find_station_by_id(self, query: int) -> list[Station]:
+    def find_stations_by_id(self, query: int) -> list[Station]:
+        results: list[Station] = []
+
         for station in self.stations_list:
             if query == station.EVA_NR:
-                return station
+                results.append(station)
+
+        return results
+    
+    def find_station_by_id(self, query: int) -> list[Station]:
+        results: list[Station] = []
+        for station in self.stations_list:
+            if query == station.EVA_NR:
+                results.append(station)
+
+        if len(results)>1:
+            raise Exception("More than one station with id '%s' found" % query)
+        else:
+            return results[0]

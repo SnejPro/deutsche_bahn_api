@@ -94,8 +94,7 @@ class TimetableHelper:
     def get_timetable_changes(self, trains: list) -> list[Train]:
         response = requests.get(
             f"https://apis.deutschebahn.com/db-api-marketplace/apis/timetables/v1/fchg/{self.station.EVA_NR}",
-            headers=self.api_authentication.get_headers(),
-            verify=False
+            headers=self.api_authentication.get_headers()
         )
         changed_trains = elementTree.fromstringlist(response.text)
 
