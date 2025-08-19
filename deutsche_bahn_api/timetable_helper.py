@@ -59,20 +59,18 @@ class TimetableHelper:
                 if train_details.tag == "ar":
                     arrival_object = train_details.attrib
 
-#            if not departure_object:
-#                """ Arrival without department """
-#                continue
-
             train_object: Train = Train()
             train_object.stop_id = train.attrib["id"]
             train_object.train_type = trip_label_object["c"]
             train_object.train_number = trip_label_object["n"]
+            # If Stop has departure_object, get some informations from it
             if departure_object:
                 train_object.platform = departure_object['pp']
                 train_object.stations = departure_object['ppth']
                 train_object.departure = departure_object['pt']
                 if "l" in departure_object:
                     train_object.train_line = departure_object['l']
+            # If not, get them from arrival_object
             else:
                 train_object.platform = arrival_object['pp']
                 if "l" in arrival_object:
