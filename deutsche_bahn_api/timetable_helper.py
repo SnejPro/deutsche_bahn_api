@@ -46,7 +46,7 @@ class TimetableHelper:
 
     def get_timetable(self, hour: Optional[int] = None, date: Optional[datetime] = None) -> list[Train]:
         train_list: list[Train] = []
-        trains = elementTree.fromstringlist(self.get_timetable_xml(hour, date))
+        trains = elementTree.fromstringlist(self.get_timetable_xml(hour=hour, date=date))
         for train in trains:
             trip_label_object: dict[str, str] | None = None
             arrival_object: dict[str, str] | None = None
