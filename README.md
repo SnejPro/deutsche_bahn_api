@@ -18,7 +18,7 @@ Create a new ApiAuthentication class and pass to it the newly created client id 
 And test with the ```api.test_credentials()``` function if the api authentication works.
 
 ```python
-api = ApiAuthentication("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET")
+api_authentication = ApiAuthentication("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET")
 success: bool = api.test_credentials()
 ```
 
@@ -37,9 +37,10 @@ found_stations_by_name = station_helper.find_stations_by_name("Freiburg")
 With the station object you are able to request the timetable from the station using the following code.
 
 ```python
-timetable_helper = TimetableHelper(YOUR_STATION_OBJECT, YOUR_API_AUTHENTICATION_OBJECT)
+timetable_helper = TimetableHelper(station_helper, api_authentication)
 trains_in_this_hour = timetable_helper.get_timetable()
 trains_at_given_hour = timetable_helper.get_timetable(12)
+trains_at_given_hour_tomorrow = timetable_helper.get_timetable(12, datetime.now() + timedelta(days=1)) # It's also possible to request the next day
 ```
 
 This method returns you a list with all trains that are scheduled for departure at this station in the current hour.
