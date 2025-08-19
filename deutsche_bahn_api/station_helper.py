@@ -1,6 +1,6 @@
 import json
 import pkgutil
-import mpu
+from haversine import haversine
 
 from deutsche_bahn_api.station import Station
 
@@ -37,7 +37,7 @@ class StationHelper:
         for station in self.stations_list:
             lat_long: dict[str, float] = normalize_lat_or_long_from_station(station)
 
-            distance = mpu.haversine_distance(
+            distance = haversine(
                 (lat_long['lat'], lat_long['long']),
                 (target_lat, target_long))
             if distance < radius:
